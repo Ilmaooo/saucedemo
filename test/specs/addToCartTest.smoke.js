@@ -1,10 +1,11 @@
+import Page from '../pageobjects/page.js';
 import LoginPage from '../pageobjects/login.page.js';
 import HomePage from '../pageobjects/home.page.js';
 import ProductPage from '../pageobjects/product.page.js';
 import CartPage from '../pageobjects/cart.page.js';
 
 describe('Add to cart', () => {
-    it('should add product to cart directly from home page', async () => {
+    it('should add product to cart from product page', async () => {
         // Login and navigate to the home page
         await LoginPage.open();
         await LoginPage.login('standard_user', 'secret_sauce');

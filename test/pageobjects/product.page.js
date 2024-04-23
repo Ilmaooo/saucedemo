@@ -11,10 +11,6 @@ class ProductPage extends Page{
         return $('#back-to-products');
     }
 
-    get cartIcon(){
-        return $('[data-test="shopping-cart-link"]');
-    }
-
     //methods
     async addToCart(){
         await this.addToCartButton.click();
@@ -22,10 +18,6 @@ class ProductPage extends Page{
 
     async backToProduct(){
         await this.backToProductsButton.click();
-    }
-
-    async openCart(){
-        await this.cartIcon.click();
     }
 
 }
