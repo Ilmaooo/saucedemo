@@ -12,4 +12,12 @@ export default class Page {
     open (path) {
         return browser.url(`https://www.saucedemo.com/${path}`)
     }
+
+    get cartIcon(){
+        return $('[data-test="shopping-cart-link"]');
+    }
+
+    async openCart(){
+        await this.cartIcon.click();
+    }
 }

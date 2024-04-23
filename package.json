@@ -15,8 +15,9 @@
     "wdio-wait-for": "^3.0.11"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.js",
-    "linter": "eslint ."
+    "wdio": "wdio run ./wdio.conf.js --spec ${npm_config_spec}",
+    "linter": "eslint .",
+    "allure": "allure generate allure-results --clean && allure open"
   },
   "dependencies": {
     "dotenv": "^16.4.5"
