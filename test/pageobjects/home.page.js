@@ -43,28 +43,26 @@ class HomePage extends Page {
 
   async saveItemPrices() {
     const priceElements = await $$('[data-test="inventory-item-price"]')
-    const prices = []
 
-    for (const priceElement of priceElements) {
-      const priceText = await priceElement.getText()
-      const priceValue = parseFloat(priceText.replace(/[^0-9.-]+/g, ''))
-      prices.push(priceValue)
-    }
-    console.log('Sorted prices:', prices)
-    return prices
+    const prices = await priceElements.map(async (element) => element.getText())
+
+    const priceValues = prices.map((price) =>
+      parseFloat(price.replace(/[^0-9.-]+/g, '')),
+    )
+
+    console.log('Sorted prices:', priceValues)
+    return priceValues
   }
 
   async saveItemNames() {
     const nameElements = await $$('[data-test="inventory-item-name"]')
-    const names = []
 
-    for (const nameElement of nameElements) {
-      const nameText = await nameElement.getText()
-      names.push(nameText)
-    }
+    const names = await nameElements.map((element) => element.getText())
+
     console.log('Sorted names:', names)
     return names
   }
+
 
   async isSorted(array, sortOption) {
     if (

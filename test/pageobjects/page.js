@@ -20,4 +20,5 @@ export default class Page {
   async openCart() {
     await this.cartIcon.click()
   }
+
 }
