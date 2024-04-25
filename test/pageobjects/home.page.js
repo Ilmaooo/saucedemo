@@ -41,6 +41,25 @@ class HomePage extends Page {
     return
   }
 
+  async saveItemPrices() {
+    const productElements = await $$(
+      '.inventory_item[data-test="inventory-item"]',
+    )
+    const prices = []
+
+    for (const productElement of productElements) {
+      const priceElement = await productElement.$(
+        '[data-test="inventory-item-price"]',
+      )
+      const priceText = await priceElement.getText()
+      const priceValue = parseFloat(priceText.replace(/[^0-9.-]+/g, ''))
+      prices.push(priceValue)
+    }
+
+    console.log('Sorted prices:', prices)
+    return prices
+  }
+
   open() {
     return super.open('inventory.html')
   }
