@@ -55,9 +55,25 @@ class HomePage extends Page {
       const priceValue = parseFloat(priceText.replace(/[^0-9.-]+/g, ''))
       prices.push(priceValue)
     }
-
     console.log('Sorted prices:', prices)
     return prices
+  }
+
+  async saveItemNames() {
+    const productElements = await $$(
+      '.inventory_item[data-test="inventory-item"]',
+    )
+    const names = []
+
+    for (const productElement of productElements) {
+      const nameElement = await productElement.$(
+        '[data-test="inventory-item-name"]',
+      )
+      const nameText = nameElement.getText()
+      names.push(nameText)
+    }
+    console.log('Sorted names:', names)
+    return names
   }
 
   open() {

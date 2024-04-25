@@ -24,7 +24,7 @@ const executeSortTest = async (sortOption) => {
           (price, index, arr) => index === 0 || price <= arr[index - 1],
         )
 
-  // Perform assertions based on sorting direction using POM methods
+  // Perform assertions based on sorting direction
   if (sortOption === 'Price (low to high)') {
     expect(isSorted).toBe(true, 'Prices are sorted from low to high')
   } else {
