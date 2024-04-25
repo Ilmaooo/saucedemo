@@ -26,9 +26,9 @@ const executeSortTest = async (sortOption) => {
 
   // Perform assertions based on sorting direction
   if (sortOption === 'Price (low to high)') {
-    expect(isSorted).toBe(true, 'Prices are sorted from low to high')
+    await expect(isSorted).toBe(true, 'Prices are sorted from low to high')
   } else {
-    expect(isSorted).toBe(true, 'Prices are sorted from high to low')
+    await expect(isSorted).toBe(true, 'Prices are sorted from high to low')
   }
 }
 

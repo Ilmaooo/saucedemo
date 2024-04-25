@@ -20,9 +20,9 @@ const executeSortTest = async (sortOption) => {
 
   //perform assertions based on sorting direction
   if (sortOption === 'Name (A to Z)') {
-    expect(isSorted).toBe(true, 'Names are sorted from A to Z')
+    await expect(isSorted).toBe(true, 'Names are sorted from A to Z')
   } else {
-    expect(isSorted).toBe(true, 'Names are sorted from Z to A')
+    await expect(isSorted).toBe(true, 'Names are sorted from Z to A')
   }
 }
 
