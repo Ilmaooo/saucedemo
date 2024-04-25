@@ -42,15 +42,10 @@ class HomePage extends Page {
   }
 
   async saveItemPrices() {
-    const productElements = await $$(
-      '.inventory_item[data-test="inventory-item"]',
-    )
+    const priceElements = await $$('[data-test="inventory-item-price"]')
     const prices = []
 
-    for (const productElement of productElements) {
-      const priceElement = await productElement.$(
-        '[data-test="inventory-item-price"]',
-      )
+    for (const priceElement of priceElements) {
       const priceText = await priceElement.getText()
       const priceValue = parseFloat(priceText.replace(/[^0-9.-]+/g, ''))
       prices.push(priceValue)
@@ -60,20 +55,36 @@ class HomePage extends Page {
   }
 
   async saveItemNames() {
-    const productElements = await $$(
-      '.inventory_item[data-test="inventory-item"]',
-    )
+    const nameElements = await $$('[data-test="inventory-item-name"]')
     const names = []
 
-    for (const productElement of productElements) {
-      const nameElement = await productElement.$(
-        '[data-test="inventory-item-name"]',
-      )
-      const nameText = nameElement.getText()
+    for (const nameElement of nameElements) {
+      const nameText = await nameElement.getText()
       names.push(nameText)
     }
     console.log('Sorted names:', names)
     return names
+  }
+
+  async isSorted(array, sortOption) {
+    if (
+      sortOption === 'Name (A to Z)' ||
+      sortOption === 'Price (low to high)'
+    ) {
+      return array.every(
+        (item, index, arr) => index === 0 || item >= arr[index - 1],
+      )
+    } else if (
+      sortOption === 'Name (Z to A)' ||
+      sortOption === 'Price (high to low)'
+    ) {
+      return array.every(
+        (item, index, arr) => index === 0 || item <= arr[index - 1],
+      )
+    } else {
+      console.error('Invalid sort option specified.')
+      return false
+    }
   }
 
   open() {

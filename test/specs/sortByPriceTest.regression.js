@@ -1,7 +1,6 @@
 import HomePage from '../pageobjects/home.page.js'
 import LoginPage from '../pageobjects/login.page.js'
 
-
 const executeSortTest = async (sortOption) => {
   //precondition for this test is for user to be logged in
   await LoginPage.open()
@@ -14,21 +13,17 @@ const executeSortTest = async (sortOption) => {
   // Retrieve prices after sorting
   const prices = await HomePage.saveItemPrices()
 
-  // Check sorting order based on sortOption
-  const isSorted =
-    sortOption === 'Price (low to high)'
-      ? prices.every(
-          (price, index, arr) => index === 0 || price >= arr[index - 1],
-        )
-      : prices.every(
-          (price, index, arr) => index === 0 || price <= arr[index - 1],
-        )
-
   // Perform assertions based on sorting direction
   if (sortOption === 'Price (low to high)') {
-    await expect(isSorted).toBe(true, 'Prices are sorted from low to high')
+    await expect(await HomePage.isSorted(prices, sortOption)).toBe(
+      true,
+      'Prices are sorted from low to high',
+    )
   } else {
-    await expect(isSorted).toBe(true, 'Prices are sorted from high to low')
+    await expect(await HomePage.isSorted(prices, sortOption)).toBe(
+      true,
+      'Prices are sorted from high to low',
+    )
   }
 }
 

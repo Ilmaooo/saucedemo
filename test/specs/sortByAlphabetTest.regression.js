@@ -5,6 +5,7 @@ const executeSortTest = async (sortOption) => {
   //precondition for this test is for user to be logged in
   await LoginPage.open()
   await LoginPage.login(process.env.USERNAME1, process.env.PASSWORD)
+  await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
 
   //chose sorting option
   await HomePage.sortByAlphabet(sortOption)
@@ -12,17 +13,17 @@ const executeSortTest = async (sortOption) => {
   //retrieve names after sorting
   const names = await HomePage.saveItemNames()
 
-  //check sorting order based on sortOption
-  const isSorted =
-    sortOption === 'Name (A to Z)'
-      ? names.every((name, index, arr) => index == 0 || name >= arr[index - 1])
-      : names.every((name, index, arr) => index === 0 || name <= arr[index - 1])
-
-  //perform assertions based on sorting direction
+  // Perform assertions based on sorting direction
   if (sortOption === 'Name (A to Z)') {
-    await expect(isSorted).toBe(true, 'Names are sorted from A to Z')
+    await expect(await HomePage.isSorted(names, sortOption)).toBe(
+      true,
+      'Names are sorted alphabetically from A to Z',
+    )
   } else {
-    await expect(isSorted).toBe(true, 'Names are sorted from Z to A')
+    await expect(await HomePage.isSorted(names, sortOption)).toBe(
+      true,
+      'Names are sorted alphabetically from Z to A',
+    )
   }
 }
 
