@@ -46,7 +46,7 @@ class HomePage extends Page {
 
     const prices = await priceElements.map(async (element) => element.getText())
 
-    const priceValues = prices.map((price) =>
+    const priceValues = await prices.map((price) =>
       parseFloat(price.replace(/[^0-9.-]+/g, '')),
     )
 
