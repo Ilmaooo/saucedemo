@@ -27,13 +27,13 @@ const executeSortTest = async (sortOption) => {
   }
 }
 
-describe('Sort by alphabet test', () => {
+describe('Sort by alphabet test from A to Z', () => {
   it('should sort from A to Z', async () => {
     await executeSortTest('Name (A to Z)')
   })
 })
 
-describe('Sort by alphabet test', () => {
+describe('Sort by alphabet test from Z to A', () => {
   it('should sort from Z to A', async () => {
     await executeSortTest('Name (Z to A)')
   })

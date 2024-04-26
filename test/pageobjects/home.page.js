@@ -44,9 +44,11 @@ class HomePage extends Page {
   async saveItemPrices() {
     const priceElements = await $$('[data-test="inventory-item-price"]')
 
-    const prices = await priceElements.map(async (element) => element.getText())
+    const prices = await priceElements.map(
+      async (element) => await element.getText(),
+    )
 
-    const priceValues = await prices.map((price) =>
+    const priceValues = prices.map((price) =>
       parseFloat(price.replace(/[^0-9.-]+/g, '')),
     )
 
@@ -63,28 +65,23 @@ class HomePage extends Page {
     return names
   }
 
-
   async isSorted(array, sortOption) {
-    if (
-      sortOption === 'Name (A to Z)' ||
-      sortOption === 'Price (low to high)'
-    ) {
-      return array.every(
-        (item, index, arr) => index === 0 || item >= arr[index - 1],
-      )
-    } else if (
-      sortOption === 'Name (Z to A)' ||
-      sortOption === 'Price (high to low)'
-    ) {
-      return array.every(
-        (item, index, arr) => index === 0 || item <= arr[index - 1],
-      )
-    } else {
-      console.error('Invalid sort option specified.')
-      return false
+    switch (sortOption) {
+      case 'Name (A to Z)':
+      case 'Price (low to high)':
+        return array.every(
+          (item, index, arr) => index === 0 || item >= arr[index - 1],
+        )
+      case 'Name (Z to A)':
+      case 'Price (high to low)':
+        return array.every(
+          (item, index, arr) => index === 0 || item <= arr[index - 1],
+        )
+      default:
+        console.error('Invalid sort option specified.')
+        return false
     }
   }
-
   open() {
     return super.open('inventory.html')
   }
