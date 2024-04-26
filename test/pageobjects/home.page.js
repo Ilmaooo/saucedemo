@@ -59,7 +59,9 @@ class HomePage extends Page {
   async saveItemNames() {
     const nameElements = await $$('[data-test="inventory-item-name"]')
 
-    const names = await nameElements.map((element) => element.getText())
+    const names = await nameElements.map(
+      async (element) => await element.getText(),
+    )
 
     console.log('Sorted names:', names)
     return names
