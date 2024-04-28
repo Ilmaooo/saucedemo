@@ -1,28 +1,20 @@
 import LoginPage from '../pageobjects/login.page.js'
 import HomePage from '../pageobjects/home.page.js'
-import ProductPage from '../pageobjects/product.page.js'
 import CartPage from '../pageobjects/cart.page.js'
 import CheckoutPage from '../pageobjects/checkout.page.js'
 import OverviewCheckoutPage from '../pageobjects/overviewCheckout.page.js'
 import Complete from '../pageobjects/completeCheckout.page.js'
 
-describe('Proceed to checkout', () => {
-  it('should complete the checkout process successfully', async () => {
-    //precondition for the test is for user to be logged in
+describe('Checkout Process - Negative Tests', () => {
+  it('should display an error message when checking out with an empty cart', async () => {
+    //precondition is that the user is logged in
     await LoginPage.open()
     await LoginPage.login(process.env.USERNAME1, process.env.PASSWORD)
     await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
 
-    //next precondition is to have at least one product in the cart
-    await HomePage.clickProductByName('Sauce Labs Bike Light')
-    await expect(browser).toHaveUrl(
-      'https://www.saucedemo.com/inventory-item.html?id=0',
-    )
-
-    //add product to cart
-    await ProductPage.addToCart()
-    await ProductPage.openCart()
-    await expect(CartPage.itemQuantity).toHaveText('1')
+    //go to the cart, precondition is that the cart is empty
+    await HomePage.openCart()
+    await expect(browser).toHaveUrl('https://www.saucedemo.com/cart.html')
 
     //proceed to checkout
     await CartPage.proceedToCheckout()
@@ -36,13 +28,13 @@ describe('Proceed to checkout', () => {
       'https://www.saucedemo.com/checkout-step-two.html',
     )
 
-    //complete checkout process
+    //complete checkout
     await OverviewCheckoutPage.finishCheckout()
     await expect(browser).toHaveUrl(
       'https://www.saucedemo.com/checkout-complete.html',
     )
     await expect(Complete.confirmMessage).toHaveText(
-      'Thank you for your order!',
+      'Please add the products to the cart before checking out.',
     )
   })
 })
