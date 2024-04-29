@@ -13,6 +13,10 @@ class CartPage extends Page {
   get itemQuantity() {
     return $('[data-test="item-quantity"]')
   }
+
+  async proceedToCheckout() {
+    await this.checkoutButton.click()
+  }
 }
 
 export default new CartPage()
