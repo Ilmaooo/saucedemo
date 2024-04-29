@@ -6,8 +6,8 @@ import CheckoutPage from '../pageobjects/checkout.page.js'
 import OverviewCheckoutPage from '../pageobjects/overviewCheckout.page.js'
 import Complete from '../pageobjects/completeCheckout.page.js'
 
-describe('Proceed to checkout', () => {
-  it('should complete the checkout process successfully', async () => {
+describe('Checkout process', () => {
+  it('should complete the checkout successfully', async () => {
     //precondition for the test is for user to be logged in
     await LoginPage.open()
     await LoginPage.login(process.env.USERNAME1, process.env.PASSWORD)
