@@ -4,12 +4,16 @@ import CartPage from '../pageobjects/cart.page.js'
 import CheckoutPage from '../pageobjects/checkout.page.js'
 import OverviewCheckoutPage from '../pageobjects/overviewCheckout.page.js'
 import Complete from '../pageobjects/completeCheckout.page.js'
+import { getUsernameFromArgs } from '../helpers/commandLineArgs.js'
 
 describe('Checkout Process - Negative Tests', () => {
   it('should display an error message when checking out with an empty cart', async () => {
+    const username = getUsernameFromArgs()
+    console.log('Username:', username)
+
     //precondition is that the user is logged in
     await LoginPage.open()
-    await LoginPage.login(process.env.USERNAME1, process.env.PASSWORD)
+    await LoginPage.login(username, process.env.PASSWORD)
     await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
 
     //go to the cart, precondition is that the cart is empty
