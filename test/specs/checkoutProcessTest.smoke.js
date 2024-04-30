@@ -1,3 +1,5 @@
+/* global username */
+
 import LoginPage from '../pageobjects/login.page.js'
 import HomePage from '../pageobjects/home.page.js'
 import ProductPage from '../pageobjects/product.page.js'
@@ -8,12 +10,11 @@ import Complete from '../pageobjects/completeCheckout.page.js'
 
 describe('Checkout process', () => {
   it('should complete the checkout successfully', async () => {
-
     console.log('Username:', username)
 
     //precondition for the test is for user to be logged in
     await LoginPage.open()
-    await LoginPage.login(global.username, process.env.PASSWORD)
+    await LoginPage.login(username, process.env.PASSWORD)
     await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
 
     //next precondition is to have at least one product in the cart
