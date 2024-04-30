@@ -1,9 +1,9 @@
 import LoginPage from '../pageobjects/login.page.js'
 import HomePage from '../pageobjects/home.page.js'
-import { getUsernameFromArgs } from '../helpers/commandLineArgs.js'
+
 
 const executeSortTest = async (sortOption) => {
-  const username = getUsernameFromArgs()
+  const username = await LoginPage.getUsernameFromArgs()
   console.log('Username:', username)
 
   //precondition for this test is for user to be logged in

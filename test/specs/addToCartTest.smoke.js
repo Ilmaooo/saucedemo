@@ -2,11 +2,11 @@ import LoginPage from '../pageobjects/login.page.js'
 import HomePage from '../pageobjects/home.page.js'
 import ProductPage from '../pageobjects/product.page.js'
 import CartPage from '../pageobjects/cart.page.js'
-import { getUsernameFromArgs } from '../helpers/commandLineArgs.js'
+
 
 describe('Add to cart', () => {
   it('should add product to cart from product page', async () => {
-    const username = getUsernameFromArgs()
+    const username = await LoginPage.getUsernameFromArgs()
     console.log('Username:', username)
 
     // Login and navigate to the home page

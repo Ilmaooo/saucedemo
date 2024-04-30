@@ -1,13 +1,14 @@
 import HomePage from '../pageobjects/home.page.js'
 import LoginPage from '../pageobjects/login.page.js'
-import { getUsernameFromArgs } from '../helpers/commandLineArgs.js'
+
 
 const executeSortTest = async (sortOption) => {
-  const username = getUsernameFromArgs()
+  const username = await LoginPage.getUsernameFromArgs()
   console.log('Username:', username)
 
   //precondition for this test is for user to be logged in
-  await LoginPage.open(username, process.env.PASSWORD)
+  await LoginPage.open()
+  await LoginPage.login(username, process.env.PASSWORD)
   await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
 
   //chose sorting option
