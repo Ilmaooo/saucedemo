@@ -12,7 +12,6 @@ describe('Add to cart', () => {
     // Login and navigate to the home page
     await LoginPage.open()
     await LoginPage.login(username, process.env.PASSWORD)
-    console.log('username:', username)
     await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
 
     // Click on the product using the custom locator
