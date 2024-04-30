@@ -20,14 +20,4 @@ export default class Page {
   async openCart() {
     await this.cartIcon.click()
   }
-
-  //get username from command line args
-  getUsernameFromArgs = () => {
-    const args = process.argv.slice(2)
-    const usernameArg = args.find((arg) => arg.startsWith('--username='))
-    const username = usernameArg
-      ? usernameArg.split('=')[1]
-      : process.env.USERNAME1
-    return username
-  }
 }
