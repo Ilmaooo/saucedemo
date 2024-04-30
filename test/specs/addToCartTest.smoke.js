@@ -6,12 +6,12 @@ import CartPage from '../pageobjects/cart.page.js'
 
 describe('Add to cart', () => {
   it('should add product to cart from product page', async () => {
-    const username = await LoginPage.getUsernameFromArgs()
-    console.log('Username:', username)
+    
+    console.log('Username:', global.username)
 
     // Login and navigate to the home page
     await LoginPage.open()
-    await LoginPage.login(username, process.env.PASSWORD)
+    await LoginPage.login(global.username, process.env.PASSWORD)
     console.log('username:', username)
     await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
 

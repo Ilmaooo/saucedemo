@@ -8,12 +8,12 @@ import Complete from '../pageobjects/completeCheckout.page.js'
 
 describe('Checkout Process - Negative Tests', () => {
   it('should display an error message when checking out with an empty cart', async () => {
-    const username = await LoginPage.getUsernameFromArgs()
+
     console.log('Username:', username)
 
     //precondition is that the user is logged in
     await LoginPage.open()
-    await LoginPage.login(username, process.env.PASSWORD)
+    await LoginPage.login(global.username, process.env.PASSWORD)
     await expect(browser).toHaveUrl('https://www.saucedemo.com/inventory.html')
 
     //go to the cart, precondition is that the cart is empty
