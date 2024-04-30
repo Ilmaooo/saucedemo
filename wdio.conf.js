@@ -197,8 +197,14 @@ export const config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {object}         browser      instance of created browser/device session
    */
-  // before: function (capabilities, specs) {
-  // },
+  before: function (capabilities, specs) {
+    const args = process.argv.slice(2)
+    const usernameArg = args.find((arg) => arg.startsWith('--username='))
+    const username = usernameArg
+      ? usernameArg.split('=')[1]
+      : process.env.USERNAME1
+    global.username = username
+  },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {string} commandName hook command name
